@@ -21,4 +21,8 @@ int main() {
 
     }
     return 0;
+
+
+     //  ¿Cuál será el orden de ejecución de los procesos?¿Será siempre el mismo? Justifica la respuesta
+     //El orden de ejecucion es primero son los que solo son hijos y luego los padres, pero al existir dos que son solamente hijos no podemos decir que siepre se ejecutan ingual
 }
