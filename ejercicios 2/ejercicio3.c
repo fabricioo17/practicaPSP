@@ -1,3 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+int main() {
+    pid_t pid1,pid2,pid3,pid4,pid5;
+   
+   
+   
+    pid1 = fork();  //creamos el primer hijo
+    if (pid1>0){ 
+    wait(NULL); // P1 ESPERA A P2
+    printf("p1\n");
+    }
+    //---------P2 CONTINUA---------------------------/
+    else{ 
+    		pid2= fork();//P2 CREA A P3
+    		
+    		
+	    	//---P2 continua-----------------------//
+	    	if(pid2>0){ 
+	    	//--------P2 PRIMERO CREA A P4 Y LUEGO ESPERA-------------------//
+	    		pid3=fork();
 	    		//----------------P2 espera-----------------//
 	    		if(pid3>0){ 
 	    		wait(NULL);
