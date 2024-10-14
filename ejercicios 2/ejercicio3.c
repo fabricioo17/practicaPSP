@@ -24,11 +24,13 @@ int main() {
 	    		//----------------P2 espera-----------------//
 	    		if(pid3>0){ 
 	    		wait(NULL);
+	    		wait(NULL); //P2 TAMBIEN ESPERA A P3
+	    		printf("p2\n");
 	    		}
 	    		
 	    		//------------continuaP4--------------//
 	    		else{ 
-	    		
+	    		    
 	    		//----------------P4 crea a P6--------------------//
 	    		pid4=fork();
 	    		
@@ -45,13 +47,12 @@ int main() {
 	    			}
 	    		
 	    		}
-	    	wait(NULL); //P2 TAMBIEN ESPERA A P3
-	    	printf("p2\n");
+	    	
 	    	}
 	    	
 	    	
 	    	//---P3 continua-----------------------//
-	    	else{
+	    else{
 	    	
 	    	//---------p3 crea a p5----------//
 	    	pid5=fork();
@@ -68,8 +69,5 @@ int main() {
 	
 	    	}
     }
-    
-    
-    
     return 0;
 }
