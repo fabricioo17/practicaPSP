@@ -8,12 +8,11 @@ int main() {
 	pid_t pid1;  
 	int fd[2];  //creamos el array para leer y escribir
 	pipe(fd); //creamos el pipe
-	time_t hora; 
+     char buffer[100]; //aqui almacenaremos lo que obtengamos al leer
+	time_t hora;  //creaoms una variable de time 
     char *fecha;
-     char buffer[100];
-    
-    time(&hora);
-    fecha=ctime(&hora);
+    time(&hora);  // obtendremos los milisegundos hasta la fecha acutal y la almacenamos en esta variable
+    fecha=ctime(&hora); // con ctime transformamos los milisegundos a un formato de fecha y lo igualamos al punto de char *fecha
     
 	pid1=fork();
 	if(pid1>0){
