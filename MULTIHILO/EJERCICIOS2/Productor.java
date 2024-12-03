@@ -12,7 +12,7 @@ public class Productor extends Thread {
     }
 
     public void run() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             System.out.print(i + "=>Productor : " + n);
             cola.put(i); //escribe el número en la coala
 

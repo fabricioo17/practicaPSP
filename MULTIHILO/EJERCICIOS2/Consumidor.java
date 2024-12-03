@@ -14,7 +14,7 @@ public class Consumidor extends Thread {
 
     public void run() {
         int valor = 0;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             valor = cola.get(i); //recoge el n�mero
             System.out.println(i + "=>Consumidor: " + n
                                + ", consume: " + valor);
