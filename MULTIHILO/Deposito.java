@@ -6,10 +6,10 @@ public class Deposito extends Thread {
     private double litrosdeposito = 0;
 
     public Deposito() {
-        // Constructor vacío
+      
     }
 
-    // Método para que un camión consuma el depósito
+   
     public synchronized double get(int identificador) throws InterruptedException {
         // Espera mientras el depósito esté vacío o el camión no pueda consumir
         while ((litrosdeposito == 0) ||
@@ -20,14 +20,14 @@ public class Deposito extends Thread {
             wait();
         }
 
-        // Camión consume el contenido del depósito
+        // Camión consume 
         double litrosConsumidos = litrosdeposito;
-        litrosdeposito = 0; // Vaciar el depósito después del consumo
+        litrosdeposito = 0; // Vaciar el depósito 
 
-        // Actualiza el estado del camión que consumió
+        // Actualizar bolean de camiones
         if (identificador == 1) {
-            consumir1 = false; // Este camión ya consumió, debe esperar al próximo llenado
-            consumir2 = true;  // El siguiente camión está listo para consumir
+            consumir1 = false; // Este camión ya consumió
+            consumir2 = true;  // El siguiente listo para consumir
             consumir3 = true;
         } else if (identificador == 2) {
             consumir2 = false;
@@ -44,18 +44,18 @@ public class Deposito extends Thread {
         return litrosConsumidos;
     }
 
-    // Método para que el productor llene el depósito
+   
     public synchronized void put(double litros) throws InterruptedException {
-        // Espera mientras el depósito no esté vacío
+        // Espera mientras el depósito no esta vacío
         while (litrosdeposito > 0) {
             System.out.println("Depósito lleno, esperando a que un camión consuma");
             wait();
         }
 
-        // Llena el depósito con la nueva cantidad de litros
+        // Llena el depósito 
         litrosdeposito = litros;
 
         System.out.println("El productor produjo " + litros + " litros");
-        notifyAll(); // Notifica a los camiones que ya pueden consumir
+        notifyAll(); // Notifica 
     }
 }
