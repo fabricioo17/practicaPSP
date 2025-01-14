@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class ProductorG extends  Thread{
 
     private Deposito deposito;
@@ -11,11 +9,11 @@ public class ProductorG extends  Thread{
 
     public void run()
     {
-        Random random=  new Random();
+
         for (int i =0;i<15;i++) {
-            int litrosdeposito = random.nextInt(10) + 1;
+
             try {
-                deposito.put(litrosdeposito);
+                deposito.put();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
