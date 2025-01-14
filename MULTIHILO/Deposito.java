@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class Deposito extends Thread {
     private boolean consumir1 = true;
@@ -6,12 +7,11 @@ public class Deposito extends Thread {
     private double litrosdeposito = 0;
 
     public Deposito() {
-      
+        // Constructor vacío
     }
 
-   
+    
     public synchronized double get(int identificador) throws InterruptedException {
-        // Espera mientras el depósito esté vacío o el camión no pueda consumir
         while ((litrosdeposito == 0) ||
                 (identificador == 1 && !consumir1) ||
                 (identificador == 2 && !consumir2) ||
@@ -20,11 +20,11 @@ public class Deposito extends Thread {
             wait();
         }
 
-        // Camión consume 
+       
         double litrosConsumidos = litrosdeposito;
         litrosdeposito = 0; // Vaciar el depósito 
 
-        // Actualizar bolean de camiones
+        // Actualiza el estado del camión que consumió
         if (identificador == 1) {
             consumir1 = false; // Este camión ya consumió
             consumir2 = true;  // El siguiente listo para consumir
@@ -40,22 +40,25 @@ public class Deposito extends Thread {
         }
 
         System.out.println("El camión " + identificador + " consumió " + litrosConsumidos + " litros");
-        notifyAll(); // Notifica al productor y otros camiones
+        notifyAll(); 
         return litrosConsumidos;
     }
 
    
-    public synchronized void put(double litros) throws InterruptedException {
-        // Espera mientras el depósito no esta vacío
+    public synchronized void put() throws InterruptedException {
+        Random random=  new Random();
+        int litros = random.nextInt(10) + 1;
+      
         while (litrosdeposito > 0) {
             System.out.println("Depósito lleno, esperando a que un camión consuma");
             wait();
         }
 
-        // Llena el depósito 
+      
         litrosdeposito = litros;
 
         System.out.println("El productor produjo " + litros + " litros");
-        notifyAll(); // Notifica 
+        notifyAll(); // Notifica a los camiones que ya pueden consumir
     }
 }
+
