@@ -18,7 +18,7 @@ public class ProductorG extends  Thread{
                 throw new RuntimeException(e);
             }
             try {
-                Thread.sleep(10000); // Simula el tiempo de producción
+                Thread.sleep(1); // Simula el tiempo de producción
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
