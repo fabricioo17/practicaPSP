@@ -20,7 +20,7 @@ private  int identificador;
                 throw new RuntimeException(e);
             }
             try {
-                Thread.sleep(10000); // Simula el tiempo de consumo
+                Thread.sleep(15000); // Simula el tiempo de consumo
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
