@@ -22,9 +22,10 @@ public class Proceso {
             System.out.println("la caja " + identificador + " esta ocupado");
             wait();
         }
-        System.out.println("la caja " + identificador + " libre");
         Thread.sleep(5000);
+
         cajaDisponible=true;
+        System.out.println("la caja " + identificador + " libre");
         notifyAll();
        return cajaDisponible;
     }
