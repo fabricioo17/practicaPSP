@@ -26,5 +26,7 @@ public class Main {
         Caja caja2 =new Caja(2,proceso);
         Caja caja3 =new Caja(3,proceso);
 
+        caja1.start();
+
     }
 }
