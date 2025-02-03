@@ -16,7 +16,8 @@ public class Cliente2 {
 
         DataOutputStream salida = new DataOutputStream(cliente.getOutputStream());
         salida.writeInt(factorial(valor));
-
+        salida.close();
+        cliente.close();
     }
 
 

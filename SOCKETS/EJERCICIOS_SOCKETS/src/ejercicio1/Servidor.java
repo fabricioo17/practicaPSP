@@ -18,7 +18,7 @@ public class Servidor {
         int recibido= entrada.readInt();
         entrada.close();
         socket.close();
-
+        servidor.close();
 
 //-----------------enviar a cliente 2 el numero
         ServerSocket servidor2= new ServerSocket(5000);
@@ -33,7 +33,10 @@ public class Servidor {
         DataInputStream entrada2= new DataInputStream(socket2.getInputStream());
         int factorial= entrada2.readInt();
         System.out.println("el factorial es " + factorial);
-
+    salida.close();
+    socket2.close();
+    entrada2.close();
+    servidor2.close();
     }
 
 }
