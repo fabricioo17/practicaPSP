@@ -1,3 +1,5 @@
+
+
 package ejercicio1;
 
 import java.io.DataInputStream;
@@ -23,3 +25,9 @@ public class Cliente2 {
         return num;
     }
 }
+
+
+
+
+
+

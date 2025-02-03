@@ -1,3 +1,4 @@
+
 package ejercicio1;
 
 import java.io.DataInputStream;
@@ -12,7 +13,7 @@ public class Servidor {
         int puerto = 5555;
         ServerSocket servidor= new ServerSocket(puerto);
         ServerSocket servidor2= new ServerSocket(5000);
-    Socket socket=servidor.accept();
+        Socket socket=servidor.accept();
         Socket socket2=servidor2.accept();
 //-------------recbir numero del cliente 1
         DataInputStream entrada= new DataInputStream(socket.getInputStream());

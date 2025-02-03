@@ -1,17 +1,18 @@
+package ejercicio1;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class EJERCICIO1 {
+public class Cliente {
 
     public static void main(String[] args) throws IOException {
         Scanner teclado= new Scanner(System.in);
-        String host = "192.168.1.10"; // Cambia esto a la IP del servidor
+        String host = "localhost"; // Cambia esto a la IP del servidor
         int puerto = 5555; // Puerto en el que el servidor está escuchando
         System.out.println("ingresa un numero");
-        teclado.nextInt();
+        int num= teclado.nextInt();
         try {
 
             // Crear socket y conectarse al servidor
@@ -19,10 +20,19 @@ public class EJERCICIO1 {
 
             DataOutputStream salida = new DataOutputStream(cliente.getOutputStream());
 
-            salida.writeUTF("");
+            salida.writeInt( num);
+            salida.close();
+            cliente.close();
+
+            //-----------------------ahora recibir el factorial del servidor
         } catch (Exception e) {
 
 
         }
     }
 }
+
+
+
+
+
