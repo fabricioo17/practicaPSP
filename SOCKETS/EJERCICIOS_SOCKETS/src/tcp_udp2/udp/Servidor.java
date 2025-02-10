@@ -6,17 +6,28 @@ import java.net.*;
 
 public class Servidor {
     public static void main(String[] args) throws IOException {
-
-        byte[] numeros = new byte[5];
+        InetAddress inet = InetAddress.getLocalHost();
+        byte[] recibido = new byte[5];
+        byte[] enviarResultado = new byte[5];
         DatagramSocket socket= new DatagramSocket(5555);
 
 
+
         while (true) {
-            DatagramPacket packet= new DatagramPacket(numeros,numeros.length);
+            DatagramPacket packet= new DatagramPacket(recibido,recibido.length);
             socket.receive(packet);
-            System.out.println("la suma es " + Suma(numeros));
-            System.out.println("el mayor es " + Mayor(numeros));
-            System.out.println("el menor es " + Menor(numeros));
+
+            //-------------------ENVIAR
+
+            //----------------------enviar---------------------------//
+
+            enviarResultado[0]= (byte) Suma(recibido);
+            enviarResultado[1]= (byte) Mayor((recibido));
+            enviarResultado[2]= (byte) Menor(recibido);
+            int puertoEnviar=34567;
+            DatagramPacket packet2= new DatagramPacket(enviarResultado,enviarResultado.length,inet,puertoEnviar);
+            socket.send(packet2); //enviamos el paquete
+
 
         }
     }

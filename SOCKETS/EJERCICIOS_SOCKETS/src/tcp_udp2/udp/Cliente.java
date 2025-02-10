@@ -7,6 +7,8 @@ public class Cliente {
         InetAddress inet = InetAddress.getLocalHost();
         //socket del cliente
         DatagramSocket socket = new DatagramSocket(34567); //Puerto local
+
+
         int puerto =5555; // servidor
         byte[] numeros = new byte[5]; //Array almacenar mensaje
 
@@ -21,6 +23,16 @@ public class Cliente {
 
         //enviar el packet
         socket.send(envio);
-        socket.close();
+
+
+
+
+        //-------------RECIBIR--------------------------------
+        byte[] recibirResultados= new byte[3];
+        DatagramPacket recibir = new DatagramPacket(recibirResultados,recibirResultados.length);
+        socket.receive(recibir);
+        System.out.println("la suma es " + recibirResultados[0]);
+        System.out.println("el mayor es " + recibirResultados[1]);
+        System.out.println("el menor es " + recibirResultados[2]);
     }
 }
