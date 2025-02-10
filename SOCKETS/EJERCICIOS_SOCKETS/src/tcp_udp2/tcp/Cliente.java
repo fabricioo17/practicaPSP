@@ -1,5 +1,6 @@
 package tcp_udp2.tcp;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -21,10 +22,16 @@ public class Cliente {
         salida.write(numeros);
 
         salida.flush(); // Asegurar que se envíen los datos antes de cerrar
-
-        socket.close();
         salida.close();
 
+        //---------RECIBIR----------------------
+        Socket socket2 = new Socket("localhost",5555);
+        byte [] recibir = new  byte[3];
+        DataInputStream entrada=new DataInputStream(socket2.getInputStream());
+        recibir=  entrada.readAllBytes();
 
+        System.out.println("la suma es " + recibir[0]);
+        System.out.println("el mayor es " + recibir[1]);
+        System.out.println("el menor es " + recibir[2]);
     }
 }
