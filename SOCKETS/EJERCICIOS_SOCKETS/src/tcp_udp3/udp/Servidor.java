@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.SocketException;
 
 public class Servidor {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -31,7 +30,7 @@ public class Servidor {
         Factura recibido = (Factura) objectInputStream.readObject();
 
 
-        System.out.println("Factura recibida: " + recibido.getNombre());
+        System.out.println("Factura recibida: " + recibido.getNumero());
 
 
         objectInputStream.close();
