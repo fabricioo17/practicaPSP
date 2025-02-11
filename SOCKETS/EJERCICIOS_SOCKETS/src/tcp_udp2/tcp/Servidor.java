@@ -9,7 +9,7 @@ import java.net.Socket;
 public class Servidor {
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(5555);
-        byte[] recibido = new byte[1024];
+        byte[] recibido = new byte[5];
         byte[] enviar=new byte[3];
         int suma;
         int mayor;
@@ -17,17 +17,18 @@ public class Servidor {
         int mensaje;
         while (true) {
             Socket socket = serverSocket.accept();
+
             DataInputStream entrada = new DataInputStream(socket.getInputStream());
             recibido = entrada.readAllBytes();
             enviar[0]= (byte) Suma(recibido);
             enviar[1]= (byte) Mayor((recibido));
             enviar[2]= (byte) Menor(recibido);
-            entrada.close();
-            socket.close();
+
+
 
             //---------------ENVIAR-----------------------------//
-            Socket socket2 = serverSocket.accept();
-            DataOutputStream salida = new DataOutputStream(socket2.getOutputStream());
+
+            DataOutputStream salida = new DataOutputStream(socket.getOutputStream());
             salida.write(enviar);
             salida.flush(); // Asegurar que se envíen los datos antes de cerrar
             salida.close();

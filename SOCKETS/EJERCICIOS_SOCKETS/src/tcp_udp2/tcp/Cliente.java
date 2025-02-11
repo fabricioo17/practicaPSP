@@ -20,14 +20,13 @@ public class Cliente {
             random= (int) ((Math.random()*10)+1);
         }
         salida.write(numeros);
-
         salida.flush(); // Asegurar que se envíen los datos antes de cerrar
-        salida.close();
+
 
         //---------RECIBIR----------------------
-        Socket socket2 = new Socket("localhost",5555);
+
         byte [] recibir = new  byte[3];
-        DataInputStream entrada=new DataInputStream(socket2.getInputStream());
+        DataInputStream entrada=new DataInputStream(socket.getInputStream());
         recibir=  entrada.readAllBytes();
 
         System.out.println("la suma es " + recibir[0]);
