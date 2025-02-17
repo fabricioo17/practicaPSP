@@ -20,13 +20,13 @@ public class Servidor {
         ObjectInputStream entrada = new ObjectInputStream(socket.getInputStream());
         //LEEMOS Y LOS CASTEAMOS A FACTURA
         Factura factura = (Factura) entrada.readObject();
-        String nombre = factura.getNumero() ;
-        System.out.println("nuemro de la factura es " + nombre);
+        String numero = factura.getNumero() ;
+        System.out.println("nuemro de la factura es " + numero);
 
 
 
         //-----------CALCULAR----------------------------
-        double iva = (0.07)*(factura.getImporte());
+        double iva = ObtenerIva(factura.getTipo(),factura.getImporte());
         double total= factura.getImporte() + iva   ;
         factura.setIva(iva);
         factura.setTotal(total);
@@ -36,5 +36,22 @@ public class Servidor {
 
         ObjectOutputStream salida = new ObjectOutputStream(socket.getOutputStream());
         salida.writeObject(factura);
+    }
+
+    public static double ObtenerIva(String tipo,double importe){
+        double iva;
+        if (tipo.equals("IGC")){
+
+        iva= (0.07)*(importe);
+        } else if (tipo.equals("ESP")) {
+            iva= (0.21)*(importe);
+        }
+        else {
+            iva= (0.15)*(importe);
+
+        }
+
+
+        return iva;
     }
 }

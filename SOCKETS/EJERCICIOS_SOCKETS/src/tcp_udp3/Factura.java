@@ -19,7 +19,7 @@ public class Factura implements Serializable {
         return importe;
     }
 
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
@@ -32,7 +32,7 @@ public class Factura implements Serializable {
     }
 
     private double  importe;
-    private int tipo;
+    private String tipo;
     private  double iva;
     private  double total;
 
@@ -66,16 +66,7 @@ public class Factura implements Serializable {
         System.out.println("ingresa el importe");
         importe=teclado.nextDouble();
 
-        System.out.println("elige el tipo de iva, 1 IGC, 2 ESP , 3  EUR");
-        int opcion = teclado.nextInt();
-        if (opcion==1){
-        tipo=1;
-        }
-        else if (opcion==2) {
-        tipo=2;
-        }
-        else {
-            tipo=3;
-        }
-        }
+        System.out.println("ingresa el tipo de iva(IGC,ESP,EUR");
+        tipo=teclado.next();
+    }
 }
