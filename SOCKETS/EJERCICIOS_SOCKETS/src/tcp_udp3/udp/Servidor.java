@@ -1,11 +1,11 @@
 package tcp_udp3.udp;
 
 import tcp_udp3.Factura;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+
+import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 
 public class Servidor {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -27,16 +27,60 @@ public class Servidor {
         ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
 
 
-        Factura recibido = (Factura) objectInputStream.readObject();
+        Factura factura = (Factura) objectInputStream.readObject();
 
 
-        System.out.println("Factura recibida: " + recibido.getNumero());
+        System.out.println("Factura recibida: " + factura.getNumero());
+
+
+        //---------------------------------------------------------
+        //-----------CALCULAR----------------------------
+        double iva = ObtenerIva(factura.getTipo(),factura.getImporte());
+        double total= factura.getImporte() + iva   ;
+        factura.setIva(iva);
+        factura.setTotal(total);
+
+
+        //---------ENVIAR-----------
+        ByteArrayOutputStream enviar = new ByteArrayOutputStream();
+        ObjectOutputStream escribir = new ObjectOutputStream(enviar);
+        escribir.writeObject(factura);
+        escribir.flush();
+
+        byte[] data2 = enviar.toByteArray();
+
+        InetAddress inetAddress =   InetAddress.getLocalHost();
+
+
+        DatagramPacket packet2=new DatagramPacket(data2, data2.length,inetAddress,1234);
+        socket.send(packet2);
+
+
+
+
+
 
 
         objectInputStream.close();
 
         
         socket.close();
+    }
+    public static double ObtenerIva(String tipo,double importe){
+        double iva;
+        if (tipo.equals("IGC")){
+
+            iva= (0.07)*(importe);
+        } else if (tipo.equals("ESP")) {
+            iva= (0.21)*(importe);
+        }
+        else {
+            iva= (0.15)*(importe);
+
+        }
+
+
+        return iva;
     }
 }
 
