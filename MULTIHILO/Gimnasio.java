@@ -9,7 +9,7 @@ public class Gimnasio {
     }
 
     public synchronized void entrar(int id) throws InterruptedException {
-        while (lleno==true){
+        while (cola.size()==5){
             System.out.println("cliente " + id + " esta esperando");
             wait();
         }
